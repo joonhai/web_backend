@@ -1,3 +1,4 @@
+
 const mapContainer = document.getElementById("map");
 const mapOption = {
     center: new kakao.maps.LatLng(37.554477, 126.970419), // Map center coordinates
@@ -64,7 +65,7 @@ function displayPlaces(data) {
             </div>
         `;
 
-        el.innerHTML = itemStr;
+        //el.innerHTML = itemStr;
         el.className = "item";
 
         kakao.maps.event.addListener(marker, "click", function () {
@@ -86,7 +87,10 @@ function displayInfowindow(marker, title, address, lat, lng) {
         <div style="padding:25px;">
             ${title}<br>
             ${address}<br>
-            <button onclick="onSubmit('${title}', '${address}', ${lat}, ${lng});">등록</button>
+            <textarea id="memo" placeholder="메모를 입력하세요" style="width:100%; height:60px;"></textarea><br>
+            <input type="time" id="timepicker" style="width:100%; margin-top:10px;"><br>
+            <button onclick="onSubmit('${title}', '${address}', ${lat}, ${lng},
+             document.getElementById('memo').value,document.getElementById('timepicker').value);">등록</button>
         </div>
     `;
 
@@ -95,15 +99,17 @@ function displayInfowindow(marker, title, address, lat, lng) {
     infowindow.open(map, marker);
 }
 
-function onSubmit(title, address, lat, lng) {
+function onSubmit(title, address, lat, lng, memo, time ) {
+    const bodyId = window.location.pathname.split('/')[2];
     $.ajax({
-        url: "/location",
-        data: { title, address, lat, lng },
+        url: `/list/${bodyId}/location`,
+        data: { title, address, lat, lng,memo,time },
         type: "POST",
     })
     .done((response) => {
         console.log("데이터 요청 성공");
-        alert("성공");
+        alert("위치가 추가되었습니다");
+        window.location.href = `/list/${bodyId}`;   // 위치 추가 후 상세 페이지로 리다이렉트
     })
     .fail((error) => {
         console.log("데이터 요청 실패");

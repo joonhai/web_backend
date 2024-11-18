@@ -1,0 +1,10 @@
+<h2>List</h2>
+<button><a href="/write">러닝코스 짜러가기</a></button>
+<ul>
+  <% write.forEach(function(item) { %>   <!-- write 배열을 반복 -->
+    <li>
+      <a href="/list/<%= item._id %>"><%= item.title %></a>  <!-- title을 출력 -->
+        <!-- quote를 출력  <%= item.quote %>-->
+    </li>
+  <% }); %>
+</ul>

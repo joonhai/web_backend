@@ -16,7 +16,8 @@ db.once("open", () => {
   console.log("MongoDB 서버에 연결되었습니다");
 });
 
-mongoose.connect(`mongodb+srv://joonhai:${userConfig.PW}@map.iuuki.mongodb.net/?retryWrites=true&w=majority&appName=map`, {
+mongoose.connect(`mongodb+srv://joonhai:${userConfig.PW}@map.iuuki.mongodb.net/?retryWrites=true&w=majority&appName=map`, 
+  {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

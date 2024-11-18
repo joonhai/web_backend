@@ -22,14 +22,16 @@ const getClickMap = (i) => () => {
     const infowindow = infowindowList[i];
     infowindow.close();
 };
-
+const bodyId = window.location.pathname.split('/')[2];
 $.ajax({
-    url: "/location",
+    url: `/list/${bodyId}`,
     type: "GET",
-}).done((response) => {
+}).done((response) => { 
+    console.log(response);
     if (response.message !== "success") return;
-    const data = response.data;
-
+    
+    const data = response.locations;  
+    
     for (let i in data) {
         const target = data[i];
         const latlng = new naver.maps.LatLng(target.lat, target.lng);
@@ -65,6 +67,9 @@ $.ajax({
         naver.maps.Event.addListener(markerList[i], 'click', getClickHandler(i));
         naver.maps.Event.addListener(map, "click", getClickMap(i));
     }
+}).fail((error) => {
+  console.log("데이터 요청 실패");
+  alert("실패");
 });
 
 const cluster1 = {
