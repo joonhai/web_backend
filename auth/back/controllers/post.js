@@ -10,7 +10,7 @@ exports.uploadPost = async (req, res, next) => {
     const post = await Post.create({
       content: req.body.content,
       img: req.body.url,
-      UserId: req.user._id,
+      userId: req.user._id,
     });
 
     await post.save();  // 몽고디비에 저장
