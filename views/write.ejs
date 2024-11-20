@@ -1,14 +1,41 @@
-	<h3>러닝코스</h3>
-	<form action="/write" method="post">
-	<div>
-	<div >
-		<label >제목</label>
-		<input type="text"  placeholder="제목을 입력해주세요." name="title">
-		<label >상세설명</label>
-		<input type="text" placeholder="러닝코스에대해 소개해주세요" name="content">
-	</div>
-	<div>
-		<input type="submit" value="작성하기">
-	</div>
-	</form>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>새 Forum 작성</title>
+    <link href="stylesheets/main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 상단바 -->
+      <div class="nav">
+        <div class="nav-title" onclick="location.href='/'">
+          <img src="/images/running_icon.png" alt="메인아이콘" />
+          <p>빽러닝</p>
+        </div>
+        <div class="nav-btns">
+          <button onclick="location.href='/'">러닝코스</button>
+          <button onclick="location.href='/talk'">러닝 톡</button>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="box">
+          <p class="write-title">새 러닝코스 작성</p>
+          <form class="write-box" action="/write" method="post">
+            <p>👉 제목</p>
+            <input type="text" placeholder="제목을 입력해주세요." name="title" />
+
+            <p>🤔 상세설명</p>
+            <input type="text" placeholder="러닝코스에 대해 소개해주세요." name="content" />
+
+            <button class="btn" type="submit">작성하기</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+	
