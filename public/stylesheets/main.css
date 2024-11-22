@@ -479,3 +479,78 @@ select:focus {
   border: 1px solid black;
   border-radius: 5px;
 }
+
+.mypage-welcome-title {
+  font-weight: bold;
+  font-size: large;
+  margin-bottom: 10px;
+}
+
+.mypage-username {
+  color: var(--Purple);
+}
+
+.mypage-current-like {
+  color: var(--Red);
+  font-weight: bold;
+}
+
+.mypage-like-title {
+  font-weight: bold;
+  font-size: large;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--Gray);
+}
+
+.talk-title-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--Gray);
+}
+
+.talk-title {
+  font-weight: bold;
+  font-size: large;
+  margin-bottom: 10px;
+}
+
+.talk-author {
+  color: var(--DarkPurple);
+}
+
+.talk-title-like {
+  font-size: x-large;
+  cursor: pointer;
+}
+
+.talk-content-div {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--Gray);
+}
+
+.talk-comment-input-div {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.talk-comment-input-div > input {
+  width: 70%;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.talk-comment {
+  display: flex;
+}
+
+.talk-comment-author {
+  color: var(--DarkPurple);
+  font-weight: bold;
+  margin-right: 10px;
+}
