@@ -18,31 +18,26 @@
         <div class="nav-btns">
           <button onclick="location.href='/'">러닝코스</button>
           <button onclick="location.href='/talk'">러닝 톡</button>
+          <button onclick="location.href='/찜목록모음나오는링크'">내 프로필</button>
         </div>
       </div>
 
       <!-- 내용 -->
       <div class="content">
+        <!-- 러닝코스 추가 버튼 -->
+        <button class="btn mb-10" onclick="location.href='/write'">➕ 러닝코스 추가하기</button>
+
         <ul>
           <!-- 리스트 하나 -->
           <% write.forEach(function(item) { %>
           <li>
             <div class="box course-main-box" onclick="location.href='/list/<%= item._id%>' ">
-              <img
-                class="course-main-icon"
-                src="images/course_icon.png"
-                alt="코스아이콘" />
+              <img class="course-main-icon" src="images/course_icon.png" alt="코스아이콘" />
               <p class="course-main-title"><%= item.title %></p>
-
-
-
             </div>
           </li>
           <% }); %>
         </ul>
-
-        <!-- 러닝코스 추가 버튼 -->
-        <button class="btn" onclick="location.href='/write'">➕ 러닝코스 추가하기</button>
       </div>
     </div>
   </body>
