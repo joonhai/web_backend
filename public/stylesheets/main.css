@@ -212,6 +212,14 @@ select:focus {
   scrollbar-width: none; /* 파이어폭스 */
 }
 
+.w-100 {
+  width: 100% !important;
+}
+
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+
 .container {
   width: 100vw;
   height: 100vh;
@@ -301,6 +309,23 @@ select:focus {
 
 .btn:hover {
   background: var(--Gray);
+}
+
+.btn-violet {
+  display: block;
+  background: var(--Purple);
+  color: var(--White);
+  font-weight: bold;
+  padding: 10px 20px;
+  margin: auto;
+  border: 1px solid var(--Gray);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  transition: 0.3s background;
+}
+
+.btn-violet:hover {
+  background: var(--DarkPurple);
 }
 
 .course-main-box {
@@ -435,4 +460,22 @@ select:focus {
   border: 1px solid black;
   border-radius: 5px;
   margin-bottom: 15px;
+}
+
+.input-group {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.input-group > label {
+  width: 30%;
+  font-weight: bold;
+}
+
+.input-group > input {
+  width: 70%;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
