@@ -479,3 +479,26 @@ select:focus {
   border: 1px solid black;
   border-radius: 5px;
 }
+
+.mypage-welcome-title {
+  font-weight: bold;
+  font-size: large;
+  margin-bottom: 10px;
+}
+
+.mypage-username {
+  color: var(--Purple);
+}
+
+.mypage-current-like {
+  color: var(--Red);
+  font-weight: bold;
+}
+
+.mypage-like-title {
+  font-weight: bold;
+  font-size: large;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--Gray);
+}

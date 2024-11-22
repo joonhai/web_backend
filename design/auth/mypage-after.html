@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>러닝톡</title>
+    <title>내 프로필(로그인 후)</title>
     <link href="../main.css" rel="stylesheet" />
   </head>
   <body>
@@ -21,13 +21,20 @@
         </div>
       </div>
 
-      <!-- 내용 -->
+      <!-- 기본 프로필 -->
       <div class="content">
-        <!-- 톡 추가 버튼 -->
-        <button class="btn" onclick="location.href='/write'">➕ 러닝톡 추가하기</button>
+        <div class="box">
+          <p class="mypage-welcome-title">
+            🏃 안녕하세요! <span class="mypage-username">홍길동</span>님.
+          </p>
+          <p class="mb-10">현재 찜한 게시물은 <span class="mypage-current-like">0</span>개에요.</p>
+          <button class="btn w-100">로그아웃</button>
+        </div>
 
-        <!-- 톡 하나 -->
-         
+        <!-- 찜 목록 -->
+        <div class="box">
+          <p class="mypage-like-title">찜 목록</p>
+        </div>
       </div>
     </div>
   </body>
