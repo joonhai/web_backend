@@ -1,10 +1,49 @@
-<h2>List</h2>
-<button><a href="/write">러닝코스 짜러가기</a></button>
-<ul>
-  <% write.forEach(function(item) { %>   <!-- write 배열을 반복 -->
-    <li>
-      <a href="/list/<%= item._id %>"><%= item.title %></a>  <!-- title을 출력 -->
-        <!-- quote를 출력  <%= item.quote %>-->
-    </li>
-  <% }); %>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forum 메인</title>
+    <link href="stylesheets/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/stylesheets/upload.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 상단바 -->
+      <div class="nav">
+        <div class="nav-title" onclick="location.href='/'">
+          <img src="/images/running_icon.png" alt="메인아이콘" />
+          <p>빽러닝</p>
+        </div>
+        <div class="nav-btns">
+          <button onclick="location.href='/'">러닝코스</button>
+          <button onclick="location.href='/talk'">러닝 톡</button>
+        </div>
+      </div>
+
+      <!-- 내용 -->
+      <div class="content">
+        <ul>
+          <!-- 리스트 하나 -->
+          <% write.forEach(function(item) { %>
+          <li>
+            <div class="box course-main-box" onclick="location.href='/list/<%= item._id%>' ">
+              <img
+                class="course-main-icon"
+                src="images/course_icon.png"
+                alt="코스아이콘" />
+              <p class="course-main-title"><%= item.title %></p>
+
+
+
+            </div>
+          </li>
+          <% }); %>
+        </ul>
+
+        <!-- 러닝코스 추가 버튼 -->
+        <button class="btn" onclick="location.href='/write'">➕ 러닝코스 추가하기</button>
+      </div>
+    </div>
+  </body>
+</html>

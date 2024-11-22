@@ -22,6 +22,7 @@ const getClickMap = (i) => () => {
     const infowindow = infowindowList[i];
     infowindow.close();
 };
+let x = [];
 const bodyId = window.location.pathname.split('/')[2];
 $.ajax({
     url: `/list/${bodyId}`,
@@ -44,11 +45,13 @@ $.ajax({
                 anchor: new naver.maps.Point(7.5, 7.5) // Centers the custom marker icon
             }
         });
-
+        
         const content = `
             <div class="infowindow_wrap">
-                <div class="infowindow_title">${target.title}</div>
+                <div class="infowindow_title">${Number(i) + 1}.${target.title}</div>
                 <div class="infowindow_address">${target.address}</div>
+              <div class="infowindow_time">집합시간: ${target.time}</div>
+              <div class="infowindow_memo">메모: ${target.memo}</div>
             </div>
         `;
 
@@ -58,10 +61,35 @@ $.ajax({
             borderColor: '#00ff0000',
             anchorSize: new naver.maps.Size(0, 0)
         });
+        infowindow.open(map, marker);
 
+        naver.maps.Event.addListener(marker, 'mouseover', () => {
+          infowindow.open(map, marker);
+      });
+  
+      // 마우스 아웃 이벤트
+      naver.maps.Event.addListener(marker, 'mouseout', () => {
+          infowindow.close();
+      });
+        x.push(latlng);
         markerList.push(marker);
         infowindowList.push(infowindow);
+        console.log(infowindow);
     }
+
+    
+
+    let polyline = new naver.maps.Polyline({
+      map: map,
+      path: x,
+
+    });
+    polyline.setOptions({
+      strokeColor:'#008d62',  
+      strokeStyle: 'solid',  // 실선
+      strokeOpacity: 1  // 선의 투명도(1은 불투명, 0은 투명
+    });
+    
 
     for (let i = 0, ii = markerList.length; i < ii; i++) {
         naver.maps.Event.addListener(markerList[i], 'click', getClickHandler(i));
