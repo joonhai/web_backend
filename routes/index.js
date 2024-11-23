@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { Location, Body } = require("../models/location");
-
+const { User } = require("../models");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -52,7 +52,7 @@ router.get('/list/:id', (req, res) => {
                     });
                 } else {
                     // 일반 요청일 경우 HTML 렌더링
-                    res.render('detail', { list: result, locations: result.location });
+                    res.render('detail', { list: result, locations: result.location,user: req.user });
                 }
             } else {
                 console.error("Body 데이터를 찾을 수 없습니다.");
@@ -65,13 +65,58 @@ router.get('/list/:id', (req, res) => {
         });
 });
 
+//좋아요
 
-  //위치추가페이지
-  router.get('/list/:id/location', function (req, res) {
-    const bodyId = req.params.id;  // Body의 ID를 가져옴
-	res.render('location');
+router.post('/list/:id/like', async (req, res) => {
+    const listId = req.params.id; // 게시글 ID
+    const userId = req.user.id; // 로그인된 사용자 ID
+
+    try {
+        const user = await User.findById(userId);
+        const post = await Body.findById(listId);
+
+        if (user.likedPosts.includes(listId)) {
+            // 좋아요 취소
+            user.likedPosts = user.likedPosts.filter(postId => postId.toString() !== listId);
+            post.likes = Math.max(0, (post.likes || 1) - 1); // 최소 0 유지
+        } else {
+            // 좋아요 추가
+            user.likedPosts.push(listId);
+            post.likes = (post.likes || 0) + 1;
+        }
+
+        await user.save();
+        await post.save();
+
+        res.redirect(`/list/${listId}`);
+    } catch (error) {
+        console.error('좋아요 처리 중 오류:', error);
+        res.status(500).send('좋아요 처리 중 오류 발생');
+    }
 });
 
+
+  //위치추가페이지
+  router.get('/list/:id/location',  async (req, res) => {
+    const bodyId = req.params.id; // 게시글 ID
+    const userId = req.user._id; // 현재 로그인된 사용자 ID
+  
+    try {
+      const user = await User.findById(userId);
+  
+      // 사용자가 좋아요를 눌렀는지 확인
+      if (!user.likedPosts.includes(bodyId)) {
+        return res.status(403).send('<script>alert("러닝에 참여해야 코스를 추가할 수 있습니다."); window.history.back();</script>');
+      }
+  
+      // 좋아요를 누른 경우 위치 추가 페이지 렌더링
+      res.render('location', { title: '위치 추가하기', bodyId });
+    } catch (error) {
+      console.error('위치 추가 페이지 로드 중 오류:', error);
+      res.status(500).send('서버 오류가 발생했습니다.');
+    }
+  });
+  
 router.post('/list/:id/location', (req, res) => {
     const bodyId = req.params.id;  // Body의 ID를 가져옴
     const { title, address, lat, lng, memo, time } = req.body;

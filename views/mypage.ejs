@@ -33,18 +33,19 @@
 
           <!-- 찜 목록 -->
           <section class="box">
-            <h2 class="mypage-like-title">찜 목록</h2>
+            <h2 class="mypage-like-title">참가 목록</h2>
+            <% user.likedPosts.forEach(post => { %>
               <article class="box">
                 <div class="talk-title-div">
                   <div class="talk-title-info">
-                    <h3 class="talk-title"></h3>
-                    <p class="talk-author">✍️ </p>
+                    <h3 class="talk-title"><a href="/list/<%= post._id %>"><%= post.title %></a></h3>
                   </div>
                 </div>
                 <div>
                   <p></p>
                 </div>
               </article>
+              <% }); %>
           </section>
         <% } else { %>
           <!-- 비로그인 상태 -->

@@ -524,7 +524,11 @@ select:focus {
 }
 
 .course-detail-like {
-  font-size: x-large;
+  background: var(--Purple);
+  padding: 5px 5px;
+  border-radius: 10px;
+  color: var(--White);
+  font-size: small;
   cursor: pointer;
 }
 

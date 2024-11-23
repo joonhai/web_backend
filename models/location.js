@@ -10,6 +10,7 @@ const locationSchema = new Schema({
     memo: { type: String, required: true },
     time: { type: String, required: true },
     bodyId: { type: Schema.Types.ObjectId, ref: 'Body', required: true },
+    
 });
 const Location = mongoose.model('Location', locationSchema);
 
@@ -17,6 +18,7 @@ const Location = mongoose.model('Location', locationSchema);
 const bodySchema = new Schema({
     title: { type: String, required: true },
     content: {type:String, required: true},
+    likes: { type: Number, default: 0 },
     location: [{ type: Schema.Types.ObjectId, ref: 'Location' },]  // Location 모델과 참조 연결
 });
 const Body = mongoose.model('Body', bodySchema);

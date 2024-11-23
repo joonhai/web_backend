@@ -3,7 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const { Post} = require('../models');
-const { afterUploadImage, uploadPost } = require('../controllers/post');
+const { uploadPost } = require('../controllers/post');
 const { createComment} = require('../controllers/comment');
 
 const router = express.Router();

@@ -37,7 +37,12 @@
               <img class="course-main-icon" src="/images/course_icon.png" alt="코스아이콘" />
               <p class="course-detail-title"><%= list.title %></p>
             </div>
-            <button class="course-detail-like">♥️</button>
+            <form id="likeForm" action="/list/<%= list._id %>/like" method="post">
+              <button type="submit" class="course-detail-like">
+                <%= user.likedPosts.includes(list._id.toString()) ? '참가취소' : '참가하기' %>(<%= list.likes || 0 %>명)
+              </button>
+            </form>
+              
           </div>
           <p class="course-detail-description"><%= list.content %></p>
         </div>
@@ -66,5 +71,6 @@
     </div>
     <script type="text/javascript" src="/javascripts/MarkerClustering.js"></script>
     <script type="text/javascript" src="/javascripts/main.js"></script>
+    
   </body>
 </html>

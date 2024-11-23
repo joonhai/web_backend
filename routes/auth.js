@@ -1,6 +1,5 @@
 const express = require('express');
-const passport = require('passport');
-
+const { User } = require("../models");
 const { join, login, logout } = require('../controllers/auth');
 
 const router = express.Router();
@@ -19,9 +18,21 @@ router.post('/join',  join);
 //             -> await User.create 수행 -> 여기서 User는 models/user.js
 
 
-router.get('/mypage', (req, res) => {
-  res.render('mypage', {title: '마이페이지', user: req.user });
+router.get('/mypage', async (req, res) => {
+  try {
+    if (req.isAuthenticated()) { 
+      const user = await User.findById(req.user._id).populate('likedPosts'); // 좋아요한 게시글 로드
+      res.render('mypage', { title: '마이페이지', user });
+    } else {
+      res.render('mypage', { title: '마이페이지', user: null });
+    }
+  } catch (error) {
+    console.error('마이페이지 로드 중 오류:', error);
+    res.status(500).send('마이페이지 로드 중 오류 발생');
+  }
 });
+
+
 
 
 // POST /auth/login
