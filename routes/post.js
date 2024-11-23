@@ -2,10 +2,10 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-
+const { Post} = require('../models');
 const { afterUploadImage, uploadPost } = require('../controllers/post');
 const { createComment} = require('../controllers/comment');
-const { isLoggedIn } = require('../middlewares');
+const { isLoggedIn,isNotLoggedIn } = require('../middlewares');
 
 const router = express.Router();
 
@@ -34,7 +34,21 @@ router.post('/img', isLoggedIn, upload.single('img'), afterUploadImage);
 
 // POST /post
 const upload2 = multer();
-router.post('/', isLoggedIn, upload2.none(), uploadPost);
+router.post('/talk', isLoggedIn, upload2.none(), uploadPost);
+
+router.get('/talk', isLoggedIn, async (req, res) => {
+  Post.find()
+  .then(results => {
+      res.render('talk.ejs', { write: results });
+  })
+  .catch(error => console.error(error));
+});
+
+
+
+router.get('/login', isNotLoggedIn, (req, res) => {
+  res.render('mypage', { title: '마이페이지' });
+});
 
 
 // 댓글 

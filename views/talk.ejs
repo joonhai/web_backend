@@ -1,12 +1,10 @@
-<% const isLogin = true %>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>러닝톡</title>
-    <link href="stylesheets/main.css" rel="stylesheet" />
+    <link href="/stylesheets/main.css" rel="stylesheet" />
   </head>
   <body>
     <div class="container">
@@ -18,15 +16,14 @@
         </div>
         <div class="nav-btns">
           <button onclick="location.href='/'">러닝코스</button>
-          <button onclick="location.href='/talk'">러닝 톡</button>
-          <button onclick="location.href='/mypage'">내 프로필</button>
+          <button onclick="location.href='/post/talk'">러닝 톡</button>
+          <button onclick="location.href='/auth/mypage'">내 프로필</button>
         </div>
       </div>
 
-      <!-- 로그인 되었는지 확인하는 조건임!! -->
-      <% if (isLogin) {%>
-      
-      <!-- 내용 -->
+      <!-- 로그인 되었는지 확인하는 조건 -->
+      <% if (user) { %>
+      <!-- 로그인된 상태 -->
       <div class="content">
         <!-- 톡 추가 버튼 -->
         <button class="btn mb-10" onclick="location.href='/writeTalk'">➕ 러닝톡 추가하기</button>
@@ -62,6 +59,7 @@
         </div>
       </div>
       <% } else { %>
+      <!-- 비로그인 상태 -->
       <div class="content">
         <div class="no-login-notice">
           <p>😊</p>

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Location, Body } = require("../model/location");
+const { Location, Body } = require("../models/location");
 
 
 /* GET home page. */
