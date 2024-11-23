@@ -1,5 +1,3 @@
-<% const isLogin = true %>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,7 +23,7 @@
       </div>
 
       <!-- 로그인 되었는지 확인하는 조건임!! -->
-      <% if (isLogin) { %>
+      <% if (user) { %>
 
       <!-- 내용 -->
       <div class="content">

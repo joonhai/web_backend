@@ -5,7 +5,6 @@ const fs = require('fs');
 const { Post} = require('../models');
 const { afterUploadImage, uploadPost } = require('../controllers/post');
 const { createComment} = require('../controllers/comment');
-const { isLoggedIn,isNotLoggedIn } = require('../middlewares');
 
 const router = express.Router();
 
@@ -16,43 +15,28 @@ try {
   fs.mkdirSync('uploads');
 }
 
-const upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, cb) {
-      cb(null, 'uploads/');
-    },
-    filename(req, file, cb) {
-      const ext = path.extname(file.originalname);
-      cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
-    },    // 이미지.png -> 이미지12312315.png
-  }),
-  limits: { fileSize: 5 * 1024 * 1024 },
-});
-
-// POST /post/img
-router.post('/img', isLoggedIn, upload.single('img'), afterUploadImage);
-
 // POST /post
 const upload2 = multer();
-router.post('/talk', isLoggedIn, upload2.none(), uploadPost);
+router.post('/talk',  upload2.none(), uploadPost);
 
-router.get('/talk', isLoggedIn, async (req, res) => {
-  Post.find()
+router.get('/talk',  async (req, res) => {
+  Post.find().populate('userId', 'nick')
   .then(results => {
-      res.render('talk.ejs', { write: results });
+    console.log("result:", results)
+      res.render('talk.ejs', { write: results, user: req.user });
   })
   .catch(error => console.error(error));
 });
 
 
 
-router.get('/login', isNotLoggedIn, (req, res) => {
+router.get('/login',  (req, res) => {
   res.render('mypage', { title: '마이페이지' });
 });
 
 
 // 댓글 
-router.post('/comment',isLoggedIn,createComment);
+router.post('/comment',createComment);
 
 /*router.post('/comment', isLoggedIn, async (req, res, next) => {
   try {
@@ -79,7 +63,7 @@ router.post('/comment',isLoggedIn,createComment);
 
 
 // 댓글 수정기능
-router.patch('/comment/:id', isLoggedIn, async (req, res, next) => {
+router.patch('/comment/:id',  async (req, res, next) => {
   try {
     const comment = await Comment.findOne({ where: { id: req.params.id, userId: req.user.id } });
     if (!comment) {
@@ -95,7 +79,7 @@ router.patch('/comment/:id', isLoggedIn, async (req, res, next) => {
 });
 
 // 댓글 삭제기능
-router.delete('/comment/:id', isLoggedIn, async (req, res, next) => {
+router.delete('/comment/:id',  async (req, res, next) => {
   try {
     const comment = await Comment.findOne({ where: { id: req.params.id, userId: req.user.id } });
     if (!comment) {

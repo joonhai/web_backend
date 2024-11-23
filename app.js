@@ -15,7 +15,7 @@ var app = express();
 const passportConfig = require('./passport');
 const authRouter = require('./routes/auth');
 const postRouter = require('./routes/post');
-const userRouter = require('./routes/user');
+const userRouter = require('./routes/users');
 
 
 

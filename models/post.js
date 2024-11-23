@@ -6,8 +6,9 @@ const postSchema = new Schema({
     type: String,
     required: true,
   },
-  img: {
+  content: {
     type: String,
+    required: true,
   },
   userId: {
     type: Schema.Types.ObjectId,
@@ -15,7 +16,6 @@ const postSchema = new Schema({
     required: true,
   },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-  hashtags: [{ type: Schema.Types.ObjectId, ref: 'Hashtag' }],
 }, {
   timestamps: true,
   versionKey: false,

@@ -7,13 +7,13 @@ const { Location, Body } = require("../models/location");
 router.get('/', function(req, res, next) {
     Body.find()
     .then(results => {
-        res.render('list.ejs', { write: results });
+        res.render('list.ejs', { write: results, user: req.user });
     })
     .catch(error => console.error(error));
 });
 
 router.get('/write', function (req, res) {
-	res.render('write');
+	res.render('write',{user: req.user});
 });
 
 // 글 작성 처리
