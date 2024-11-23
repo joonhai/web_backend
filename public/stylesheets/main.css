@@ -360,6 +360,7 @@ select:focus {
 
 .course-detail-title-box {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding-bottom: 5px;
   border-bottom: 1px solid var(--Gray);
@@ -522,7 +523,7 @@ select:focus {
   color: var(--DarkPurple);
 }
 
-.talk-title-like {
+.course-detail-like {
   font-size: x-large;
   cursor: pointer;
 }
@@ -553,4 +554,19 @@ select:focus {
   color: var(--DarkPurple);
   font-weight: bold;
   margin-right: 10px;
+}
+
+.no-login-notice {
+  text-align: center;
+  font-size: large;
+  margin-top: 30px;
+}
+
+.no-login-notice > p {
+  margin-bottom: 10px;
+}
+
+.no-login-notice > p > span {
+  font-weight: bold;
+  color: var(--DarkPurple);
 }

@@ -109,6 +109,21 @@ router.post('/list/:id/location', (req, res) => {
         });
 });
 
+router.get('/talk', (req, res) => {
+	res.render('talk');
+})
+
+router.get('/mypage', (req, res) => {
+    res.render('mypage')
+})
+
+router.get('/join', (req, res) => {
+    res.render('join')
+})
+
+router.get('/writeTalk', (req, res) => {
+    res.render('writeTalk')
+})
   
   
 module.exports = router;
