@@ -4,7 +4,7 @@ const { Post } = require('../models');
 exports.uploadPost = async (req, res, next) => {
   try {
     const post = await Post.create({
-      test: req.body.content,
+      title: req.body.title,
       content: req.body.content,
       userId: req.user._id,
     });
