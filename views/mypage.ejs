@@ -1,3 +1,5 @@
+<% const isLogin = true %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,13 +24,13 @@
       </div>
 
       <!-- 로그인 되었는지 확인하는 조건임!! -->
-      <% if (true) { %>
+      <% if (isLogin) { %>
       <div class="content">
         <div class="box">
           <p class="mypage-welcome-title">
             🏃 안녕하세요! <span class="mypage-username">홍길동</span>님.
           </p>
-          <p class="mb-10">현재 찜한 게시물은 <span class="mypage-current-like">0</span>개에요.</p>
+          <p class="mb-10">현재 찜한 러닝코스는 <span class="mypage-current-like">0</span>개에요.</p>
           <button class="btn w-100">로그아웃</button>
         </div>
 
