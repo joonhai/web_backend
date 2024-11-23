@@ -5,9 +5,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Forum 메인</title>
+    <title>러닝톡</title>
     <link href="stylesheets/main.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/stylesheets/upload.css" />
   </head>
   <body>
     <div class="container">
@@ -25,24 +24,42 @@
       </div>
 
       <!-- 로그인 되었는지 확인하는 조건임!! -->
-      <% if (isLogin) { %>
-
+      <% if (isLogin) {%>
+      
       <!-- 내용 -->
       <div class="content">
-        <!-- 러닝코스 추가 버튼 -->
-        <button class="btn mb-10" onclick="location.href='/write'">➕ 러닝코스 추가하기</button>
+        <!-- 톡 추가 버튼 -->
+        <button class="btn mb-10" onclick="location.href='/writeTalk'">➕ 러닝톡 추가하기</button>
 
-        <ul>
-          <!-- 리스트 하나 -->
-          <% write.forEach(function(item) { %>
-          <li>
-            <div class="box course-main-box" onclick="location.href='/list/<%= item._id%>' ">
-              <img class="course-main-icon" src="images/course_icon.png" alt="코스아이콘" />
-              <p class="course-main-title"><%= item.title %></p>
+        <!-- 톡 하나 -->
+        <div class="box">
+          <div class="talk-title-div">
+            <div class="talk-title-info">
+              <p class="talk-title">게시물 타이틀</p>
+              <p class="talk-author">✍️ 작성자</p>
             </div>
-          </li>
-          <% }); %>
-        </ul>
+          </div>
+          <div class="talk-content-div">
+            <p>게시글 내용</p>
+          </div>
+          <div class="talk-comment-div">
+            <!-- 댓글 입력창 -->
+            <div class="talk-comment-input-div">
+              <input
+                type="text"
+                action="/post/comment"
+                id="commentInput"
+                placeholder="댓글을 입력하세요" />
+              <button id="commentSubmitBtn" class="btn">댓글 달기</button>
+            </div>
+
+            <!-- 댓글 하나 -->
+            <div class="talk-comment">
+              <p class="talk-comment-author">😀 작성자</p>
+              <p>댓글 내용</p>
+            </div>
+          </div>
+        </div>
       </div>
       <% } else { %>
       <div class="content">

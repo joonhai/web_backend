@@ -26,14 +26,18 @@
         <div class="nav-btns">
           <button onclick="location.href='/'">러닝코스</button>
           <button onclick="location.href='/talk'">러닝 톡</button>
+          <button onclick="location.href='/mypage'">내 프로필</button>
         </div>
       </div>
 
       <div class="content">
         <div class="box course-detail-box">
           <div class="course-detail-title-box">
-            <img class="course-main-icon" src="/images/course_icon.png" alt="코스아이콘" />
-            <p class="course-detail-title"><%= list.title %></p>
+            <div style="display: flex; align-items: center;">
+              <img class="course-main-icon" src="/images/course_icon.png" alt="코스아이콘" />
+              <p class="course-detail-title"><%= list.title %></p>
+            </div>
+            <button class="course-detail-like">♥️</button>
           </div>
           <p class="course-detail-description"><%= list.content %></p>
         </div>

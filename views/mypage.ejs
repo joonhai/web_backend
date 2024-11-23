@@ -1,0 +1,91 @@
+<% const isLogin = true %>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>마이페이지</title>
+    <link href="stylesheets/main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 상단바 -->
+      <div class="nav">
+        <div class="nav-title" onclick="location.href='/'">
+          <img src="/images/running_icon.png" alt="메인아이콘" />
+          <p>빽러닝</p>
+        </div>
+        <div class="nav-btns">
+          <button onclick="location.href='/'">러닝코스</button>
+          <button onclick="location.href='/talk'">러닝 톡</button>
+          <button onclick="location.href='/mypage'">내 프로필</button>
+        </div>
+      </div>
+
+      <!-- 로그인 되었는지 확인하는 조건임!! -->
+      <% if (isLogin) { %>
+      <div class="content">
+        <div class="box">
+          <p class="mypage-welcome-title">
+            🏃 안녕하세요! <span class="mypage-username">홍길동</span>님.
+          </p>
+          <p class="mb-10">현재 찜한 러닝코스는 <span class="mypage-current-like">0</span>개에요.</p>
+          <button class="btn w-100">로그아웃</button>
+        </div>
+
+        <!-- 찜 목록 -->
+        <div class="box">
+          <p class="mypage-like-title">찜 목록</p>
+
+          <!-- 찜한 톡 하나 -->
+          <div class="box">
+            <div class="talk-title-div">
+              <div class="talk-title-info">
+                <p class="talk-title">게시물 타이틀</p>
+                <p class="talk-author">✍️ 작성자</p>
+              </div>
+            </div>
+            <div>
+              <p>게시글 내용</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } else { %>
+      <!-- 로그인 박스 -->
+      <div class="content">
+        <div class="box">
+          <form id="login-form" action="/auth/login" class="form" method="post">
+            <div class="input-group">
+              <label for="userId">👉 아이디</label>
+              <input
+                id="userId"
+                type="text"
+                name="userId"
+                placeholder="아이디를 입력해주세요."
+                required
+                autofocus />
+            </div>
+            <div class="input-group">
+              <label for="password">👉 비밀번호</label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="비밀번호를 입력해주세요."
+                required />
+            </div>
+            <button class="btn-violet w-100 mb-10" type="submit">로그인</button>
+          </form>
+        </div>
+
+        <!-- 회원가입 하러가기 -->
+        <button class="btn w-100" onclick="location.href='/join'">
+          ☺️ 계정이 없다면 회원가입을 해주세요!
+        </button>
+      </div>
+    </div>
+    <% } %>
+  </body>
+</html>
