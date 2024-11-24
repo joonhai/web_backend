@@ -92,9 +92,6 @@ app.get('/list/:id/location', (req, res) => {
     res.render('location');
 });
 
-/*app.use('/', pageRouter);
-app.use('/talk', talkRouter); // 러닝 톡
-app.use('/course', courseRouter); // 러닝 코스*/
 
 app.use('/auth', authRouter);
 app.use('/post', postRouter);

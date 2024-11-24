@@ -97,26 +97,25 @@ router.post('/list/:id/like', async (req, res) => {
 
 
   //위치추가페이지
-  router.get('/list/:id/location',  async (req, res) => {
+router.get('/list/:id/location',  async (req, res) => {
     const bodyId = req.params.id; // 게시글 ID
     const userId = req.user._id; // 현재 로그인된 사용자 ID
-  
+
     try {
-      const user = await User.findById(userId);
-  
+    const user = await User.findById(userId);
+
       // 사용자가 좋아요를 눌렀는지 확인
-      if (!user.likedPosts.includes(bodyId)) {
+    if (!user.likedPosts.includes(bodyId)) {
         return res.status(403).send('<script>alert("러닝에 참여해야 코스를 추가할 수 있습니다."); window.history.back();</script>');
-      }
-  
-      // 좋아요를 누른 경우 위치 추가 페이지 렌더링
-      res.render('location', { title: '위치 추가하기', bodyId });
-    } catch (error) {
-      console.error('위치 추가 페이지 로드 중 오류:', error);
-      res.status(500).send('서버 오류가 발생했습니다.');
     }
-  });
-  
+
+      // 좋아요를 누른 경우 위치 추가 페이지 렌더링
+res.render('location', { title: '위치 추가하기', bodyId });
+    } catch (error) {
+    console.error('위치 추가 페이지 로드 중 오류:', error);
+    res.status(500).send('서버 오류가 발생했습니다.');
+    }
+});
 router.post('/list/:id/location', (req, res) => {
     const bodyId = req.params.id;  // Body의 ID를 가져옴
     const { title, address, lat, lng, memo, time } = req.body;

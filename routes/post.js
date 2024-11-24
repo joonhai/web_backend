@@ -5,8 +5,6 @@ const fs = require('fs');
 const { Post} = require('../models');
 const { uploadPost , renderTalk } = require('../controllers/post');
 const { createComment} = require('../controllers/comment');
-const { isLoggedIn } = require('../middlewares');
-
 const router = express.Router();
 
 
@@ -23,7 +21,7 @@ router.get('/login',  (req, res) => {
 
 
 // 댓글 
-router.post('/comment', isLoggedIn, createComment);
+router.post('/comment',  createComment);
 
 
 // 댓글 수정기능
