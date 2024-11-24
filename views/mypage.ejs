@@ -24,47 +24,53 @@
       <!-- 메인 콘텐츠 -->
       <main class="content">
         <% if (user) { %>
-          <!-- 로그인 상태 -->
-          <section class="box">
-            <p class="mypage-welcome-title">🏃 안녕하세요! <span class="mypage-username"><%= user.nick %></span>님.</p>
-            <p class="mb-10">현재 찜한 러닝코스를 확인해보세요.</p>
-            <a class="btn w-100" href='/auth/logout'>로그아웃</a>
-          </section>
+        <!-- 로그인 상태 -->
+        <section class="box">
+          <p class="mypage-welcome-title">
+            🏃 안녕하세요! <span class="mypage-username"><%= user.nick %></span>님.
+          </p>
+          <button class="btn-violet" onclick="location.href='/auth/logout'">로그아웃</button>
+        </section>
 
-          <!-- 찜 목록 -->
-          <section class="box">
-            <h2 class="mypage-like-title">참가 목록</h2>
-            <% user.likedPosts.forEach(post => { %>
-              <article class="box">
-                <div class="talk-title-div">
-                  <div class="talk-title-info">
-                    <h3 class="talk-title"><a href="/list/<%= post._id %>"><%= post.title %></a></h3>
-                  </div>
-                </div>
-                <div>
-                  <p></p>
-                </div>
-              </article>
-              <% }); %>
-          </section>
+        <!-- 참가 목록 -->
+        <section class="box">
+          <h2 class="mypage-like-title">참가 목록</h2>
+          <% user.likedPosts.forEach(post => { %>
+          <article class="course-main-box box w-100" onclick="location.href='/list/<%= post._id %>'">
+            <img class="course-main-icon" src="/images/course_icon.png" alt="코스아이콘" />
+            <p class="course-main-title"><%= post.title %></p>
+          </article>
+          <% }); %>
+        </section>
         <% } else { %>
-          <!-- 비로그인 상태 -->
-          <section class="box">
-            <form id="login-form" action="/auth/login" class="form" method="post">
-              <div class="input-group">
-                <label for="userId">👉 아이디</label>
-                <input id="userId" type="text" name="userId" placeholder="아이디를 입력해주세요." required autofocus />
-              </div>
-              <div class="input-group">
-                <label for="password">👉 비밀번호</label>
-                <input id="password" type="password" name="password" placeholder="비밀번호를 입력해주세요." required />
-              </div>
-              <button class="btn-violet w-100 mb-10" type="submit">로그인</button>
-            </form>
-            <button class="btn w-100" onclick="location.href='/auth/join'">
-              ☺️ 계정이 없다면 회원가입을 해주세요!
-            </button>
-          </section>
+        <!-- 비로그인 상태 -->
+        <section class="box">
+          <form id="login-form" action="/auth/login" class="form" method="post">
+            <div class="input-group">
+              <label for="userId">👉 아이디</label>
+              <input
+                id="userId"
+                type="text"
+                name="userId"
+                placeholder="아이디를 입력해주세요."
+                required
+                autofocus />
+            </div>
+            <div class="input-group">
+              <label for="password">👉 비밀번호</label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="비밀번호를 입력해주세요."
+                required />
+            </div>
+            <button class="btn-violet w-100 mb-10" type="submit">로그인</button>
+          </form>
+          <button class="btn w-100" onclick="location.href='/auth/join'">
+            ☺️ 계정이 없다면 회원가입을 해주세요!
+          </button>
+        </section>
         <% } %>
       </main>
     </div>
