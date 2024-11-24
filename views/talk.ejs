@@ -28,35 +28,37 @@
         <button class="btn mb-10" onclick="location.href='/writeTalk'">➕ 러닝톡 추가하기</button>
 
         <!-- 게시물 리스트 -->
-          <% write.forEach(function(item) { %>
-            <div class="box">
-              <div class="talk-title-div">
-                <div class="talk-title-info">
-                  <p class="talk-title"><%= item.title %></p>
-                  <p class="talk-author">✍️<%= item.userId.nick %> </p>
-                </div>
-              </div>
-              <div class="talk-content-div">
-                <p><%= item.content %></p>
-              </div>
-              <div class="talk-comment-div">
-                <!-- 댓글 입력창 -->
-                <div class="talk-comment-input-div">
-                  <input
-                    type="text"
-                    action="/post/comment"
-                    id="commentInput"
-                    placeholder="댓글을 입력하세요" />
-                  <button id="commentSubmitBtn" class="btn">댓글 달기</button>
-                </div>
-                <!-- 댓글 하나 -->
-                <div class="talk-comment">
-                  <p class="talk-comment-author">😀 작성자</p>
-                  <p>댓글 내용</p>
-                </div>
+        <% write.forEach(function(item) { %>
+          <div class="box">
+            <div class="talk-title-div">
+              <div class="talk-title-info">
+                <p class="talk-title"><%= item.title %></p>
+                <p class="talk-author">✍️<%= item.userId.nick %> </p>
               </div>
             </div>
-          <% }); %>
+            <div class="talk-content-div">
+              <p><%= item.content %></p>
+            </div>
+            <div class="talk-comment-div">
+              <!-- 댓글 입력 폼 -->
+              <form action="/post/comment" method="post" class="talk-comment-form">
+                <input type="hidden" name="postId" value="<%= item._id %>" />
+                <input type="text" name="content" placeholder="댓글을 입력하세요" required />
+                <button type="submit" class="btn">댓글 달기</button>
+              </form>
+
+              <!-- 댓글 리스트 -->
+              <% if (item.comments && item.comments.length > 0) { %>
+                <% item.comments.forEach(function(comment) { %>
+                  <div class="talk-comment">
+                    <p class="talk-comment-author">😀 <%= comment.userId ? comment.userId.nick : '익명' %></p>
+                    <p><%= comment.content %></p>
+                  </div>
+                <% }); %>
+              <% } %>
+            </div>
+          </div>
+        <% }); %>
       </div>
       <% } else { %>
       <!-- 비로그인 상태 -->

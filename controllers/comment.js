@@ -10,6 +10,7 @@ exports.createComment = async (req, res, next) => {
       return res.status(404).send('게시물이 존재하지 않습니다.');
     }
 
+    // 댓글 생성
     const comment = new Comment({
       content,
       postId,
@@ -18,15 +19,12 @@ exports.createComment = async (req, res, next) => {
 
     await comment.save();
 
-    post.comments.push(comment._id);
-    await post.save();
-
-    const fullComment = await Comment.findById(comment._id).populate({
-      path: 'userId',
-      select: 'nick',
+    // 게시물에 댓글 추가
+    await Post.findByIdAndUpdate(postId, {
+      $push: { comments: comment._id },
     });
 
-    return res.status(201).json({ message: '댓글 작성 성공', comment: fullComment });
+   res.redirect('/post/talk'); // 댓글 작성 후 다시 '러닝톡' 페이지로 리다이렉트
   } catch (error) {
     console.error(error);
     next(error);
