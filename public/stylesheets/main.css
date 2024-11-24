@@ -539,12 +539,12 @@ select:focus {
   border-bottom: 1px solid var(--Gray);
 }
 
-.talk-comment-input-div {
+.talk-comment-form {
   display: flex;
   margin-bottom: 10px;
 }
 
-.talk-comment-input-div > input {
+.talk-comment-form > input {
   width: 70%;
   padding: 5px;
   border: 1px solid black;
@@ -553,6 +553,7 @@ select:focus {
 
 .talk-comment {
   display: flex;
+  margin-bottom: 5px;
 }
 
 .talk-comment-author {
