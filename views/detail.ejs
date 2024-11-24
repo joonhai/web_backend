@@ -33,16 +33,23 @@
       <div class="content">
         <div class="box course-detail-box">
           <div class="course-detail-title-box">
-            <div style="display: flex; align-items: center;">
+            <div style="display: flex; align-items: center">
               <img class="course-main-icon" src="/images/course_icon.png" alt="코스아이콘" />
               <p class="course-detail-title"><%= list.title %></p>
             </div>
             <form id="likeForm" action="/list/<%= list._id %>/like" method="post">
-              <button type="submit" class="course-detail-like">
-                <%= user.likedPosts.includes(list._id.toString()) ? '참가취소' : '참가하기' %>(<%= list.likes || 0 %>명)
+              <%- user.likedPosts.includes(list._id.toString()) ? `
+              <button class="course-detail-like">
+                <img src="/images/group_yes.png" alt="참가한코스" />
+                <p>${list.likes || 0}</p>
               </button>
+              ` : `
+              <button class="course-detail-like">
+                <img src="/images/group_no.png" alt="참가안한코스" />
+                <p>${list.likes || 0}</p>
+              </button>
+              ` %>
             </form>
-              
           </div>
           <p class="course-detail-description"><%= list.content %></p>
         </div>
@@ -72,6 +79,5 @@
     </div>
     <script type="text/javascript" src="/javascripts/MarkerClustering.js"></script>
     <script type="text/javascript" src="/javascripts/main.js"></script>
-    
   </body>
 </html>
