@@ -524,12 +524,13 @@ select:focus {
 }
 
 .course-detail-like {
-  background: var(--Purple);
-  padding: 5px 5px;
-  border-radius: 10px;
-  color: var(--White);
+  width: 25px;
   font-size: small;
   cursor: pointer;
+}
+
+.course-detail-like > img {
+  width: 100%;
 }
 
 .talk-content-div {
